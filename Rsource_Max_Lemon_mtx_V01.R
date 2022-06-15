@@ -10,7 +10,6 @@ dt$para$beverage = "Max_Lemon"
 
 setwd(paste0(dt$wd <- paste0(wd$fe[[ grep(dt$para$customer, names(wd$fe)) ]]$Mastermodelle, dt$para$beverage)))
 setwd( print( this.path::this.dir() ) )
-setwd("..")
 dt$wd.git <- print( getwd() )
 
 # location, line, main ####
@@ -89,6 +88,8 @@ dt$para$sperr <- data.frame( TA = c(dt$para$SOLL[ 1 ] - .4, dt$para$SOLL[ 1 ] + 
 # dt$para$Charge.val.Sirup <- ""
 
 # rename R files (run only once)
-# dt$para$Rfiles <- list.files(getwd(), pattern = ".R$", recursive = T)
-# file.rename(dt$para$Rfiles, gsub("beverage", dt$para$beverage, dt$para$Rfiles))
+setwd(dt$wd.git)
+
+dt$para$Rfiles <- list.files(getwd(), pattern = ".R$", recursive = T)
+file.rename(dt$para$Rfiles, gsub("beverage", dt$para$beverage, dt$para$Rfiles))
 

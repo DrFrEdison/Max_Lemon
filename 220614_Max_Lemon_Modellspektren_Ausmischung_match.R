@@ -4,12 +4,12 @@ dir( pattern = "_mtx_" )
 source.file <- print(dir( pattern = "_mtx_" )[ length( dir( pattern = "_mtx_" ))])
 source( paste0(getwd(), "/", source.file) )
 
-Acid <- T # Acid column in MTX file ?
+Acid <- F # Acid column in MTX file ?
 
 # read in data ####
 setwd(dt$wd)
 setwd("./Modellerstellung")
-setwd(paste0("./", dt$para$model.date[1], "_", dt$para$model.pl[1]))
+setwd(paste0("./", dt$para$model.raw.date[1], "_", dt$para$model.raw.pl[1]))
 setwd("./spc")
 setwd( dt$wd.mastermodel <- getwd() )
 
@@ -19,18 +19,11 @@ setwd("..")
 require(openxlsx)
 
 dir( pattern = "Q-xx-MTX-")
-dt$qxxmtx1 <- "Q-xx-MTX-00022-V01-00_Fanta_Lemon_Zero.xlsx"
-dt$qxxmtx2 <- "Q-xx-MTX-00023-V01-00_Fanta_Lemon_Zero.xlsx"
+dt$qxxmtx1 <- "Q-xx-MTX-00024-V01-00_Max_Lemon.xlsx"
 
 istprozent1 <- openxlsx::read.xlsx(dt$qxxmtx1, sheet = "p_IST_g")
-istprozent2 <- openxlsx::read.xlsx(dt$qxxmtx2, sheet = "p_IST_g")
-istprozent2 <- istprozent2[ 1:4 , ]
-istprozent <- rbind.fill(list(istprozent1, istprozent2))
-
-istprozent <- istprozent[ !is.na(istprozent$T1K) , ]
-
-istprozent$T3[ is.na(istprozent$T3) & istprozent$H2O < 100 ] <- istprozent$H2O[ is.na(istprozent$T3) & istprozent$H2O < 100 ]
-istprozent$T3[ is.na(istprozent$T3) & istprozent$H2O > 100 ] <- istprozent$T2[ is.na(istprozent$T3) & istprozent$H2O > 100 ]
+istprozent <- istprozent1
+istprozent <- istprozent[ !is.na(istprozent$Acesulfam) , ]
 
 istprozent
 names(istprozent)[1] <- "Probe_Anteil"
