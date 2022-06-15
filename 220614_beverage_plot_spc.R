@@ -60,12 +60,16 @@ mtx_plot_spc(dir = dt$wd.mastermodel
              , baseline = NA
              , pngplot = F
              , plotlyplot = T
-             , recursive = T)
+             , recursive = T
+             , filestext = NA
+             , colp = NA
+             , subfiles = NA
+             , write = T)
 
 # Plot and write subspectra ####
 dt$parameter
 for(i in 1 : length(dt$parameter) )
-  # for(i in 1)
+  # for(i in c(4))
   mtx_plot_spc(dir = dt$wd.mastermodel
                , beverage = dt$para$beverage
                , parameter = dt$parameter[ i ]
@@ -73,6 +77,9 @@ for(i in 1 : length(dt$parameter) )
                , pngplot = F
                , plotlyplot = T
                , recursive = T
+               , filestext = NA
+               , colp = NA
+               , subfiles = NA
                , write = F)
 
 # Plot and write VAS ####
